@@ -1,8 +1,9 @@
 import React from 'react';
+import './Person.css';
 
 const person = (props) => {
 	return (
-		<div>
+		<div className="Person">
 			<p>
 				Person Name: {props.name} and Age: {props.age}
             </p>
