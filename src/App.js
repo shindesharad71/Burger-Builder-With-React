@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -13,29 +14,33 @@ class App extends Component {
 	};
 
 	nameChangedHandler = (event, index) => {
-    const persons = [...this.state.persons];
-    persons[index].name = event.target.value;
-    this.setState({persons});
-  };
-  
-  deletePersonHandler = (index) => {
-    const persons = [...this.state.persons];
-    persons.splice(index, 1);
-    this.setState({persons});
-  }
+		const persons = [...this.state.persons];
+		persons[index].name = event.target.value;
+		this.setState({ persons });
+	};
+
+	deletePersonHandler = (index) => {
+		const persons = [...this.state.persons];
+		persons.splice(index, 1);
+		this.setState({ persons });
+	};
 
 	togglePersonsHandler = () => {
 		this.setState({ showPersons: !this.state.showPersons });
 	};
 
 	render() {
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      border: '1px sold blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
+		const buttonStyle = {
+			backgroundColor: 'green',
+			color: 'white',
+			border: '1px sold blue',
+			padding: '8px',
+			cursor: 'pointer',
+			':hover': {
+				backgroundColor: 'lightgreen',
+				color: 'black'
+			},
+		};
 
 		let persons = null;
 
@@ -45,26 +50,34 @@ class App extends Component {
 					{this.state.persons.map((person, i) => (
 						<Person
 							name={person.name}
-              age={person.age}
-              key={i}
-              changed={(event) => this.nameChangedHandler(event, i)}
-              clicked={() => this.deletePersonHandler(i)}
+							age={person.age}
+							key={i}
+							changed={(event) =>
+								this.nameChangedHandler(event, i)
+							}
+							clicked={() => this.deletePersonHandler(i)}
 						/>
 					))}
 				</div>
-      );
-      
-      buttonStyle.backgroundColor = 'red';
+			);
+
+			buttonStyle.backgroundColor = 'red';
+			buttonStyle[':hover'] = {
+				backgroundColor: 'lightred',
+				color: 'black'
+			};
 		}
 
 		return (
 			<div className="App">
 				<h1>This is React App</h1>
-				<button style={buttonStyle} onClick={this.togglePersonsHandler}>Switch Name</button>
+				<button style={buttonStyle} onClick={this.togglePersonsHandler}>
+					Switch Name
+				</button>
 				{persons}
 			</div>
 		);
 	}
 }
 
-export default App;
+export default Radium(App);
