@@ -4,14 +4,14 @@ import './App.css';
 import Person from './Person/Person';
 
 const StyledButton = styled.button`
-	background-color: green;
+	background-color: ${props => props.alt ? 'red' : 'green'};
 	color: white;
 	border: 1px sold blue;
 	padding: 8px;
 	cursor: pointer;
 
 	&:hover {
-		background-color: lightgreen;
+		background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
 		color: black;
 	}
 `;
@@ -84,7 +84,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<h1>This is React App</h1>
-				<StyledButton onClick={this.togglePersonsHandler}>
+				<StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
 					Switch Name
 				</StyledButton>
 				{persons}
