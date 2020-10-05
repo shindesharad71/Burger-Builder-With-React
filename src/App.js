@@ -43,18 +43,6 @@ class App extends Component {
 	};
 
 	render() {
-		const buttonStyle = {
-			backgroundColor: 'green',
-			color: 'white',
-			border: '1px sold blue',
-			padding: '8px',
-			cursor: 'pointer',
-			':hover': {
-				backgroundColor: 'lightgreen',
-				color: 'black',
-			},
-		};
-
 		let persons = null;
 
 		if (this.state.showPersons) {
@@ -73,12 +61,6 @@ class App extends Component {
 					))}
 				</div>
 			);
-
-			buttonStyle.backgroundColor = 'red';
-			buttonStyle[':hover'] = {
-				backgroundColor: 'lightred',
-				color: 'black',
-			};
 		}
 
 		return (
