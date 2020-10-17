@@ -55,7 +55,7 @@ class BurgerBuilder extends Component {
 			},
 		};
 		axios
-			.post('/orders.jso', order)
+			.post('/orders.json', order)
 			.then((res) => {
 				console.log(res);
 			})
