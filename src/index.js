@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 const app = (
-	<BrowserRouter>
+	<HashRouter>
 		<React.StrictMode>
 			<App />
 		</React.StrictMode>
-	</BrowserRouter>
+	</HashRouter>
 );
 
 ReactDOM.render(app, document.getElementById('root'));
