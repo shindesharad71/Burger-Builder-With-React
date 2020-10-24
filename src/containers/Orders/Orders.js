@@ -1,16 +1,36 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import classes from './Orders.module.scss';
 import Order from '../../components/Order/Order';
+import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 class Orders extends Component {
-    render() {
-        return (
-            <div>
-                <Order/>
-                <Order/>
-            </div>
-        );
-    }
+	state = { orders: [], loading: true };
+
+	componentDidMount() {
+		axios
+			.get('orders.json')
+			.then((res) => {
+				
+				const fetchedOrders = [];
+				for (const key in res.data) {
+					fetchedOrders.push({ ...res.data[key], id: key });
+                }
+                this.setState({ loading: false, orders: fetchedOrders });
+			})
+			.catch((err) => {
+				this.setState({ loading: false });
+			});
+	}
+
+	render() {
+		return (
+			<div>
+				<Order />
+				<Order />
+			</div>
+		);
+	}
 }
 
-export default Orders;
+export default withErrorHandler(Orders, axios);
