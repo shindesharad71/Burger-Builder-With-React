@@ -82,8 +82,11 @@ class ContactData extends Component {
 					],
 				},
 				value: '',
+				validation: {},
+				valid: true,
 			},
 		},
+		formIsValid: false,
 		loading: false,
 	};
 
@@ -121,15 +124,18 @@ class ContactData extends Component {
 		updatedFormElement.value = event.target.value;
 		updatedFormElement.touched = true;
 
-		if (updatedFormElement.validation) {
-			updatedFormElement.valid = this.checkValidity(
-				updatedFormElement.value,
-				updatedFormElement.validation
-			);
-		}
-
+		updatedFormElement.valid = this.checkValidity(
+			updatedFormElement.value,
+			updatedFormElement.validation
+		);
 		updatedOrderForm[inputIdentifier] = updatedFormElement;
-		this.setState({ orderForm: updatedOrderForm });
+
+		let formIsValid = true;
+		for (const inputIdentifier in updatedOrderForm) {
+			formIsValid =
+				updatedOrderForm[inputIdentifier].valid && formIsValid;
+		}
+		this.setState({ orderForm: updatedOrderForm, formIsValid });
 	};
 
 	checkValidity = (value, rules) => {
@@ -169,7 +175,11 @@ class ContactData extends Component {
 						/>
 					);
 				})}
-				<Button btnType="Success" clicked={this.orderHandler}>
+				<Button
+					btnType="Success"
+					clicked={this.orderHandler}
+					disabled={!this.state.formIsValid}
+				>
 					ORDER
 				</Button>
 			</form>
