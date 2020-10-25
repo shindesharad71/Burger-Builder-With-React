@@ -13,40 +13,60 @@ class ContactData extends Component {
 				elementConfig: {
 					type: 'text',
 					placeholder: 'Your name',
-					value: '',
 				},
+				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
 			},
 			street: {
 				elementType: 'input',
 				elementConfig: {
 					type: 'text',
 					placeholder: 'Your street',
-					value: '',
 				},
+				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
 			},
 			zipCode: {
 				elementType: 'input',
 				elementConfig: {
 					type: 'text',
 					placeholder: 'Your zip code',
-					value: '',
 				},
+				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
 			},
 			country: {
 				elementType: 'input',
 				elementConfig: {
 					type: 'text',
 					placeholder: 'Your country',
-					value: '',
 				},
+				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
 			},
 			email: {
 				elementType: 'input',
 				elementConfig: {
 					type: 'email',
 					placeholder: 'Your email',
-					value: '',
 				},
+				value: '',
+				validation: {
+					required: true,
+				},
+				valid: false,
 			},
 			deliveryMethod: {
 				elementType: 'select',
@@ -56,6 +76,7 @@ class ContactData extends Component {
 						{ value: 'cheapest', displayValue: 'Cheapest' },
 					],
 				},
+				value: '',
 			},
 		},
 		loading: false,
@@ -75,7 +96,7 @@ class ContactData extends Component {
 		const order = {
 			ingredients: this.props.ingredients,
 			price: this.props.price,
-			orderData: formData
+			orderData: formData,
 		};
 		axios
 			.post('/orders.json', order)
@@ -93,8 +114,25 @@ class ContactData extends Component {
 		const updatedOrderForm = { ...this.state.orderForm };
 		const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
 		updatedFormElement.value = event.target.value;
+
+		if (updatedFormElement.validation) {
+			updatedFormElement.valid = this.checkValidity(
+				updatedFormElement.value,
+				updatedFormElement.validation
+			);
+		}
+
 		updatedOrderForm[inputIdentifier] = updatedFormElement;
 		this.setState({ orderForm: updatedOrderForm });
+	};
+
+	checkValidity = (value, rules) => {
+		let isValid = true;
+		if (rules.required) {
+			isValid = value.trim() !== '';
+		}
+
+		return isValid;
 	};
 
 	render() {
@@ -116,6 +154,8 @@ class ContactData extends Component {
 							elementType={formElement.config.elementType}
 							elementConfig={formElement.config.elementConfig}
 							value={formElement.config.value}
+							invalid={!formElement.config.valid}
+							shouldValidate={formElement.config.validation}
 							changed={(event) =>
 								this.inputChangedHandler(event, formElement.id)
 							}
