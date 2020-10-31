@@ -11,7 +11,6 @@ import axios from '../../axios-orders';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 
-
 class BurgerBuilder extends Component {
 	state = {
 		purchasing: false,
@@ -40,20 +39,7 @@ class BurgerBuilder extends Component {
 	};
 
 	purchaseContinueHandler = () => {
-		const queryParams = [];
-		for (let i in this.state.ingredients) {
-			queryParams.push(
-				`${encodeURIComponent(i)}=${encodeURIComponent(
-					this.state.ingredients[i]
-				)}`
-			);
-		}
-		queryParams.push(`price=${this.state.totalPrice}`);
-		const queryString = queryParams.join('&');
-		this.props.history.push({
-			pathname: '/checkout',
-			search: `?${queryString}`,
-		});
+		this.props.history.push('/checkout');
 	};
 
 	updatePurchaseState(ingredients) {
@@ -123,7 +109,7 @@ class BurgerBuilder extends Component {
 const mapStateToProps = (state) => {
 	return {
 		ings: state.ingredients,
-		price: Number(state.totalPrice).toFixed(2)
+		price: Number(state.totalPrice).toFixed(2),
 	};
 };
 const mapDispatchToProps = (dispatch) => {
@@ -137,8 +123,11 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch({
 				type: actionTypes.REMOVE_INGREDIENT,
 				ingredientName: ingName,
-			})
+			}),
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withErrorHandler(BurgerBuilder, axios));
