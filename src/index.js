@@ -6,10 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from './store/reducer';
+import burgerBuilder from './store/reducers/burgerBuilder';
 import { HashRouter } from 'react-router-dom';
 
-const store = createStore(reducer);
+const store = createStore(burgerBuilder);
 
 const app = (
 	<Provider store={store}>
