@@ -5,11 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import burgerBuilder from './store/reducers/burgerBuilder';
+import { createStore, applyMiddleware } from 'redux';
+import burgerBuilderStore from './store/reducers/burgerBuilder';
 import { HashRouter } from 'react-router-dom';
+import thunk from 'redux-thunk';
 
-const store = createStore(burgerBuilder);
+const store = createStore(burgerBuilderStore, applyMiddleware(thunk));
 
 const app = (
 	<Provider store={store}>
