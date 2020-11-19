@@ -13,7 +13,7 @@ import * as burgerBuilderActions from '../../store/actions';
 
 class BurgerBuilder extends Component {
 	state = {
-		purchasing: false
+		purchasing: false,
 	};
 
 	componentDidMount() {
@@ -94,9 +94,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		ings: state.ingredients,
-		price: Number(state.totalPrice).toFixed(2),
-		error: state.error
+		ings: state.burgerBuilder.ingredients,
+		price: Number(state.burgerBuilder.totalPrice).toFixed(2),
+		error: state.burgerBuilder.error,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
@@ -105,7 +105,8 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(burgerBuilderActions.addIngredient(ingName)),
 		onIngredientRemoved: (ingName) =>
 			dispatch(burgerBuilderActions.removeIngredient(ingName)),
-		onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients())
+		onInitIngredients: () =>
+			dispatch(burgerBuilderActions.initIngredients()),
 	};
 };
 

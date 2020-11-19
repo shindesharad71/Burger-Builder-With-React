@@ -5,12 +5,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import burgerBuilderStore from './store/reducers/burgerBuilder';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import orderReducer from './store/reducers/order';
 import { HashRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
-const store = createStore(burgerBuilderStore, applyMiddleware(thunk));
+const rootReducer = combineReducers({
+	burgerBuilder: burgerBuilderReducer,
+	order: orderReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const app = (
 	<Provider store={store}>
