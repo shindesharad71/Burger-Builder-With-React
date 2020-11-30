@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import classes from './Auth.module.scss';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
 
 class Auth extends Component {
 	state = {
@@ -33,18 +35,25 @@ class Auth extends Component {
 				touched: false,
 			},
 		},
-    };
-    
-    checkValidity = (value, rules) => {
+		isSignUp: true,
+	};
+
+	switchAuthModeHandler = () => {
+		this.setState((prevState) => {
+			return { isSignUp: !prevState.isSignUp };
+		});
+	};
+
+	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
 			isValid = value.trim() !== '';
 		}
 
 		return isValid;
-    };
-    
-    inputChangedHandler = (event, controlName) => {
+	};
+
+	inputChangedHandler = (event, controlName) => {
 		const updatedControls = {
 			...this.state.controls,
 			[controlName]: {
@@ -57,9 +66,18 @@ class Auth extends Component {
 				touched: true,
 			},
 		};
-		this.setState({controls: updatedControls});
+		this.setState({ controls: updatedControls });
 	};
-    
+
+	onSubmitHandler = (event) => {
+		event.preventDefault();
+		this.props.onAuth(
+			this.state.controls.email.value,
+			this.state.controls.password.value,
+			this.state.isSignUp
+		);
+	};
+
 	render() {
 		const formElementsArray = [];
 
@@ -87,13 +105,26 @@ class Auth extends Component {
 
 		return (
 			<div className={classes.Auth}>
-				<form>
-                    {form}
-                    <Button btnType="Success">SUBMIT</Button>
-                </form>
+				<form onSubmit={this.onSubmitHandler}>
+					{form}
+					<Button btnType="Success">SUBMIT</Button>
+					<Button
+						btnType="Danger"
+						clicked={this.switchAuthModeHandler}
+					>
+						SWITCH TO {this.state.isSignUp ? 'SIGNIN' : 'SIGNUP'}
+					</Button>
+				</form>
 			</div>
 		);
 	}
 }
 
-export default Auth;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onAuth: (email, password, isSignUp) =>
+			dispatch(actions.auth(email, password, isSignUp)),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Auth);
