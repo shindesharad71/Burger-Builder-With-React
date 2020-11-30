@@ -7,8 +7,8 @@ export const authStart = () => {
 	return { type: actionTypes.AUTH_START };
 };
 
-export const authSuccess = (authData) => {
-	return { type: actionTypes.AUTH_SUCCESS, authData };
+export const authSuccess = (idToken, userId) => {
+	return { type: actionTypes.AUTH_SUCCESS, idToken, userId };
 };
 
 export const authFail = (error) => {
@@ -17,11 +17,11 @@ export const authFail = (error) => {
 
 export const auth = (email, password, isSignUp) => {
 	return (dispatch) => {
-        let authType = 'signUp';
-        
-        if(!isSignUp) {
-            authType = 'signInWithPassword';
-        }
+		let authType = 'signUp';
+
+		if (!isSignUp) {
+			authType = 'signInWithPassword';
+		}
 
 		dispatch(authStart());
 		axios
@@ -31,7 +31,7 @@ export const auth = (email, password, isSignUp) => {
 			)
 			.then((res) => {
 				console.log(res.data);
-				dispatch(authSuccess(res.data));
+				dispatch(authSuccess(res.data.idToken, res.data.localId));
 			})
 			.catch((err) => {
 				console.error(err);
