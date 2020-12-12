@@ -12,7 +12,7 @@ export const authSuccess = (idToken, userId) => {
 };
 
 export const authFail = (error) => {
-	return { type: actionTypes.AUTH_SUCCESS, error };
+	return { type: actionTypes.AUTH_FAIL, error };
 };
 
 export const auth = (email, password, isSignUp) => {
@@ -35,7 +35,7 @@ export const auth = (email, password, isSignUp) => {
 			})
 			.catch((err) => {
 				console.error(err);
-				dispatch(authFail(err));
+				dispatch(authFail(err.response.data.error));
 			});
 	};
 };
