@@ -50,11 +50,11 @@ export const fetchOrdersStart = () => {
 	return { type: actionTypes.FETCH_ORDERS_START };
 };
 
-export const fetchOrders = () => {
-	return (dispatch) => {
+export const fetchOrders = (token) => {
+	return (dispatch, getState) => {
 		dispatch(fetchOrdersStart());
 		axios
-			.get('orders.json')
+			.get(`orders.json?auth=${token}`)
 			.then((res) => {
 				const fetchedOrders = [];
 				for (const key in res.data) {
