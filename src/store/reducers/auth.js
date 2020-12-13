@@ -6,6 +6,7 @@ const initialState = {
 	userId: null,
 	error: null,
 	loading: false,
+	authRedirect: '/'
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +25,8 @@ const reducer = (state = initialState, action) => {
 
 		case actionTypes.AUTH_LOGOUT:
 			return {...state, token: null, userId: null};
+		case actionTypes.SET_AUTH_REDIRECT_PATH:
+			return {...state, redirectPath: action.path};
 
 		default:
 			return state;
