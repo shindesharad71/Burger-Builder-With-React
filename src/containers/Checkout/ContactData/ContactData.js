@@ -7,6 +7,7 @@ import Input from '../../../components/UI/Input/Input';
 import { connect } from 'react-redux';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions';
+import {Redirect} from 'react-router-dom';
 
 class ContactData extends Component {
 	state = {
@@ -182,8 +183,16 @@ class ContactData extends Component {
 		if (this.props.loading) {
 			form = <Spinner />;
 		}
+
+		let redirectToOrders = null;
+		if(this.props.purchased) {
+			redirectToOrders = <Redirect to="/orders" />
+
+		}
+
 		return (
 			<div className={classes.ContactData}>
+				{redirectToOrders}
 				<h4>Enter your contact data</h4>
 				{form}
 			</div>
@@ -196,7 +205,8 @@ const mapStateToProps = (state) => {
 		ings: state.burgerBuilder.ingredients,
 		price: state.burgerBuilder.totalPrice,
 		loading: state.order.loading,
-		userId: state.auth.userId
+		userId: state.auth.userId,
+		purchased: state.order.purchased
 	};
 };
 
