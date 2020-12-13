@@ -5,10 +5,15 @@ import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
-
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './store/actions'
 
 class App extends Component {
+	componentDidMount() {
+		this.props.onTrySignup();
+	}
+
 	render() {
 		return (
 			<Layout>
@@ -24,4 +29,10 @@ class App extends Component {
 	}
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onTrySignup: () => dispatch(actions.authCheckState())
+	};
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App));
