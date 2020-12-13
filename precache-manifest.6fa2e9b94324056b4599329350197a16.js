@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bb1c6e0c8cdfdacb3638d61c77780674",
+    "revision": "b01b4d2b3adf873cf59038ce331ac5f5",
     "url": "/Burger-Builder-With-React/index.html"
   },
   {
-    "revision": "cde663dbf1ce48db34b0",
-    "url": "/Burger-Builder-With-React/static/css/main.7e6e9aae.chunk.css"
+    "revision": "b66f751c0bb63d4a3aaf",
+    "url": "/Burger-Builder-With-React/static/css/main.d7385ca8.chunk.css"
   },
   {
-    "revision": "1f7b050bbe74c628131f",
-    "url": "/Burger-Builder-With-React/static/js/2.a5e0b569.chunk.js"
+    "revision": "c0811efb5fefcb4a57fb",
+    "url": "/Burger-Builder-With-React/static/js/2.5ee00111.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/Burger-Builder-With-React/static/js/2.a5e0b569.chunk.js.LICENSE.txt"
+    "url": "/Burger-Builder-With-React/static/js/2.5ee00111.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "cde663dbf1ce48db34b0",
-    "url": "/Burger-Builder-With-React/static/js/main.4cb0758c.chunk.js"
+    "revision": "b66f751c0bb63d4a3aaf",
+    "url": "/Burger-Builder-With-React/static/js/main.57490f19.chunk.js"
   },
   {
     "revision": "a30d5217c770d75c5786",
