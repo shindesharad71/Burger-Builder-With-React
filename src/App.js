@@ -9,10 +9,10 @@ import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./store/actions";
 
-const app = (props) => {
+const App = (props) => {
   useEffect(() => {
-	props.onTrySignup();
-  }, []);
+    props.onTrySignup();
+  }, [props]);
 
   let routes = (
     <Switch>
@@ -50,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(app));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
