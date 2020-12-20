@@ -4,6 +4,11 @@ An Udemy Course Practice App Build With React Which Includes React, Redux, React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Codebase types
+
+1. [With React Lifecycle (class based)](https://github.com/shindesharad71/Burger-Builder-With-React)
+2. [With React Hooks](https://github.com/shindesharad71/Burger-Builder-With-React/tree/hooks)
+
 ## Demo
 ![Demo](demo.gif)
 
