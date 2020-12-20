@@ -79,11 +79,13 @@ class Auth extends Component {
 
 	onSubmitHandler = (event) => {
 		event.preventDefault();
-		this.props.onAuth(
-			this.state.controls.email.value,
-			this.state.controls.password.value,
-			this.state.isSignUp
-		);
+		if(this.state.controls.email.value && this.state.controls.password.value) {
+			this.props.onAuth(
+				this.state.controls.email.value,
+				this.state.controls.password.value,
+				this.state.isSignUp
+			);
+		}
 	};
 
 	render() {
